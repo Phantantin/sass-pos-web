@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">SaaS POS</title>
+  <rect width="512" height="512" rx="104" fill="#0f172a"/>
+  <path fill="#38bdf8" d="M126 128h260v52H126zm0 102h260v52H126zm0 102h162v52H126z"/>
+  <circle cx="354" cy="358" r="52" fill="#22c55e"/>
+  <path fill="#fff" d="M343 332h22v17h17v22h-17v17h-22v-17h-17v-22h17z"/>
+</svg>

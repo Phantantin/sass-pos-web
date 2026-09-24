@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'"
+    />
+    <title>Bạn đang ngoại tuyến | SaaS POS</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      body {
+        align-items: center;
+        background: #f8fafc;
+        color: #0f172a;
+        display: flex;
+        margin: 0;
+        min-height: 100vh;
+        padding: 1.5rem;
+      }
+      main {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 1rem;
+        box-shadow: 0 12px 32px rgb(15 23 42 / 8%);
+        margin: auto;
+        max-width: 32rem;
+        padding: 2rem;
+        text-align: center;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin: 0 0 0.75rem;
+      }
+      p {
+        color: #475569;
+        line-height: 1.55;
+        margin: 0.5rem 0;
+      }
+      button {
+        background: #0f172a;
+        border: 0;
+        border-radius: 0.5rem;
+        color: #fff;
+        cursor: pointer;
+        font: inherit;
+        margin-top: 1rem;
+        padding: 0.7rem 1rem;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #0f172a;
+          color: #e2e8f0;
+        }
+        main {
+          background: #1e293b;
+          border-color: #334155;
+        }
+        p {
+          color: #cbd5e1;
+        }
+        button {
+          background: #e2e8f0;
+          color: #0f172a;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Bạn đang ngoại tuyến</h1>
+      <p>Không thể tải trang này vì không có kết nối mạng.</p>
+      <p>Your current session, sales, orders, and customer data are not stored on this device.</p>
+      <form method="get" action="">
+        <button type="submit">Thử lại / Try again</button>
+      </form>
+    </main>
+  </body>
+</html>
