@@ -3,7 +3,10 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
-  output: "standalone",
+  // Vercel's Next.js adapter manages its own output and Next 16.3's
+  // standalone trace is incompatible with the adapter's onBuildComplete step.
+  // Keep standalone output for the Docker/self-hosted deployment only.
+  output: process.env.VERCEL ? undefined : "standalone",
   turbopack: { root: process.cwd() },
   async headers() {
     return [
