@@ -7,13 +7,35 @@ export async function POST(request: Request) {
   if (!apiUrl) return NextResponse.json({ message: "SPRING_API_URL chưa được cấu hình" }, { status: 500 });
 
   const body = await request.json();
-  const upstream = await fetch(`${apiUrl.replace(/\/$/, "")}/auth/signup`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-    cache: "no-store",
-  });
-  const data: unknown = await upstream.json().catch(() => ({ message: "Backend trả về dữ liệu không hợp lệ" }));
+  let upstream: Response;
+  try {
+    upstream = await fetch(`${apiUrl.replace(/\/$/, "")}/auth/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      cache: "no-store",
+    });
+  } catch {
+    return NextResponse.json(
+      { message: "Không kết nối được backend. Dịch vụ có thể đang khởi động, hãy đợi rồi thử đăng ký lại." },
+      { status: 503 },
+    );
+  }
+
+  const rawBody = await upstream.text();
+  let data: unknown = {};
+  if (rawBody) {
+    try {
+      data = JSON.parse(rawBody);
+    } catch {
+      return NextResponse.json(
+        {
+          message: `Backend trả về phản hồi không phải JSON (HTTP ${upstream.status}). Hãy kiểm tra dịch vụ Render rồi thử lại.`,
+        },
+        { status: 502 },
+      );
+    }
+  }
   if (!upstream.ok) return NextResponse.json(data, { status: upstream.status });
 
   const token =

@@ -45,6 +45,7 @@
     "signup": "Đăng ký",
     "signingUp": "Đang đăng ký…",
     "signupSuccess": "Đăng ký thành công",
+    "backendUnavailable": "Không thể kết nối dịch vụ đăng ký. Hãy đợi backend khởi động rồi thử lại.",
     "passwordMismatch": "Xác nhận mật khẩu chưa khớp"
   },
   "Dashboard": {

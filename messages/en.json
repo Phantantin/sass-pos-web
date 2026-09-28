@@ -45,6 +45,7 @@
     "signup": "Sign up",
     "signingUp": "Signing up…",
     "signupSuccess": "Account created successfully",
+    "backendUnavailable": "The signup service is unavailable. Wait for the backend to start, then try again.",
     "passwordMismatch": "The password confirmation does not match"
   },
   "Dashboard": {

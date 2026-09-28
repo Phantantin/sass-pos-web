@@ -42,37 +42,41 @@ export default function SignupPage() {
   });
 
   async function submit(values: SignupValues) {
-    const response = await fetch("/api/auth/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        fullName: values.fullName,
-        email: values.email,
-        phone: values.phone || null,
-        password: values.password,
-      }),
-    });
-    const data: unknown = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      toast.error(responseMessage(data) ?? t("failed"));
-      return;
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: values.fullName,
+          email: values.email,
+          phone: values.phone || null,
+          password: values.password,
+        }),
+      });
+      const data: unknown = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        toast.error(responseMessage(data) ?? t("failed"));
+        return;
+      }
+      const role =
+        typeof data === "object" &&
+        data !== null &&
+        "user" in data &&
+        typeof data.user === "object" &&
+        data.user !== null &&
+        "role" in data.user
+          ? data.user.role
+          : null;
+      if (!isUserRole(role)) {
+        toast.error(t("unknownRole"));
+        return;
+      }
+      toast.success(t("signupSuccess"));
+      router.replace(roleHome(role, locale));
+      router.refresh();
+    } catch {
+      toast.error(t("backendUnavailable"));
     }
-    const role =
-      typeof data === "object" &&
-      data !== null &&
-      "user" in data &&
-      typeof data.user === "object" &&
-      data.user !== null &&
-      "role" in data.user
-        ? data.user.role
-        : null;
-    if (!isUserRole(role)) {
-      toast.error(t("unknownRole"));
-      return;
-    }
-    toast.success(t("signupSuccess"));
-    router.replace(roleHome(role, locale));
-    router.refresh();
   }
 
   return (
