@@ -22,6 +22,10 @@ const protectedSegments = new Set([
 ]);
 
 export function proxy(request: NextRequest) {
+  if (request.nextUrl.pathname === "/") {
+    return NextResponse.redirect(new URL(`/${routing.defaultLocale}/login`, request.url));
+  }
+
   const response = handleIntlRouting(request);
   const [, locale, segment] = request.nextUrl.pathname.split("/");
   const isProtected =
